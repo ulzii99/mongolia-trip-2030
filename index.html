@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Монгол Гэр Бүлийн Аялал 2030</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sky: #1a3a5c; --sky-light: #2a5f8f;
+      --gold: #c9922a; --gold-light: #e8b84b;
+      --cream: #fdf6e8; --dark: #0e1208;
+      --text: #2d1f0e; --muted: #7a6244;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Serif',Georgia,serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .hero-slides{position:absolute;inset:0}
+    .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;animation:crossfade 27s infinite}
+    .slide:nth-child(1){animation-delay:0s}
+    .slide:nth-child(2){animation-delay:9s}
+    .slide:nth-child(3){animation-delay:18s}
+    @keyframes crossfade{0%{opacity:0}5%{opacity:1}28%{opacity:1}35%{opacity:0}100%{opacity:0}}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,12,3,.93) 0%,rgba(5,12,3,.42) 35%,rgba(5,12,3,.15) 60%,rgba(5,12,3,.55) 100%);z-index:1}
+    .stripe{position:absolute;left:0;right:0;height:10px;z-index:4;background:repeating-linear-gradient(90deg,var(--gold) 0 16px,var(--gold-light) 16px 18px,#8b1a1a 18px 34px,var(--gold-light) 34px 36px)}
+    .stripe-top{top:0}.stripe-bottom{bottom:0}
+    .hero-content{position:relative;z-index:2;padding:2rem;animation:fadeUp 1.3s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(45px)}to{opacity:1;transform:translateY(0)}}
+    .hero-eyebrow{font-size:.78rem;letter-spacing:.44em;color:var(--gold-light);text-transform:uppercase;font-style:italic;margin-bottom:1.3rem}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,9vw,7.5rem);font-weight:900;color:#fff;line-height:.93;text-shadow:0 4px 50px rgba(0,0,0,.75);margin-bottom:.55rem}
+    .hero-title em{font-style:italic;color:var(--gold-light)}
+    .hero-subtitle{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.5vw,1.95rem);color:rgba(255,255,255,.82);font-style:italic;margin-bottom:2.2rem}
+    .hero-rule{width:150px;height:1px;margin:0 auto 2.2rem;background:linear-gradient(90deg,transparent,var(--gold-light),transparent)}
+    .hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-bottom:2.4rem}
+    .stat{text-align:center}
+    .stat-num{display:block;font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--gold-light);line-height:1}
+    .stat-lbl{font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:.3rem}
+    .hero-desc{max-width:600px;margin:0 auto;font-size:.98rem;line-height:1.88;color:rgba(255,255,255,.7)}
+    .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:7px;color:rgba(255,255,255,.4);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase}
+    .scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* ROUTE BAR */
+    .route-bar{background:var(--sky);border-bottom:3px solid var(--gold);padding:1rem 2rem;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.3rem .5rem;font-size:.78rem;color:rgba(255,255,255,.72)}
+    .rs{color:var(--gold-light);font-weight:600}.ra{color:rgba(255,255,255,.3)}
+
+    /* PHOTO STRIP */
+    .photo-strip{display:grid;grid-template-columns:repeat(5,1fr);height:265px;overflow:hidden}
+    .ps-cell{position:relative;overflow:hidden}
+    .ps-cell img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
+    .ps-cell:hover img{transform:scale(1.1)}
+    .ps-cell::after{content:attr(data-label);position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,transparent 50%);color:white;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:flex-end;padding:.8rem;opacity:0;transition:opacity .3s}
+    .ps-cell:hover::after{opacity:1}
+
+    /* SECTION */
+    .section-wrap{max-width:1200px;margin:0 auto;padding:5rem 2rem}
+    .eyebrow{font-size:.7rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+    .heading{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--sky);line-height:1.15;margin-bottom:1.2rem}
+    .lead{color:var(--muted);font-size:.95rem;line-height:1.82;max-width:640px;margin-bottom:3.5rem}
+
+    /* CARDS */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:2.2rem}
+    .card{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 3px 22px rgba(26,58,92,.07);opacity:0;transform:translateY(32px);transition:opacity .55s ease,transform .55s ease,box-shadow .35s ease}
+    .card.vis{opacity:1;transform:translateY(0)}
+    .card:hover{transform:translateY(-9px) !important;box-shadow:0 22px 52px rgba(26,58,92,.16)}
+    .card-img{position:relative;height:218px;overflow:hidden}
+    .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease;display:block}
+    .card:hover .card-img img{transform:scale(1.07)}
+    .card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.62) 0%,transparent 55%)}
+    .day-badge{position:absolute;top:12px;left:12px;z-index:2;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);color:var(--gold-light);font-size:.67rem;letter-spacing:.22em;text-transform:uppercase;padding:.28rem .7rem;border-radius:2px;border-left:2px solid var(--gold)}
+    .photo-ttl{position:absolute;bottom:14px;left:16px;right:16px;z-index:2;font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.85);line-height:1.2}
+    .photo-sub{display:block;font-family:'Noto Serif',serif;font-size:.76rem;font-weight:400;font-style:italic;color:var(--gold-light);margin-top:3px}
+    .accent{height:4px}
+    .a-blue{background:linear-gradient(90deg,#1a3a5c,#3a7abf)}
+    .a-gold{background:linear-gradient(90deg,#9a6c10,#e8b84b)}
+    .a-red{background:linear-gradient(90deg,#7a1010,#cc3030)}
+    .a-green{background:linear-gradient(90deg,#1a4a1a,#4a9a3a)}
+    .a-indigo{background:linear-gradient(90deg,#1a1a7a,#4060cc)}
+    .a-teal{background:linear-gradient(90deg,#0a4a6a,#1a9aaa)}
+    .card-body{padding:1.6rem 1.6rem 1.4rem}
+    .card-desc{font-size:.88rem;color:var(--text);line-height:1.82;margin-bottom:1.2rem}
+    .thumbs{display:flex;gap:6px;margin-bottom:1.3rem}
+    .thumb{flex:1;height:64px;border-radius:3px;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+    .thumb:hover img{transform:scale(1.14)}
+    .card-ul{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.4rem}
+    .card-ul li{font-size:.8rem;color:var(--muted);padding-left:1.3rem;position:relative;line-height:1.55}
+    .card-ul li::before{content:'◆';position:absolute;left:0;top:.32em;font-size:.4rem;color:var(--gold)}
+    .badge{display:inline-block;padding:.3rem .78rem;border-radius:2px;font-size:.67rem;letter-spacing:.17em;text-transform:uppercase;font-weight:600}
+    .b-city{background:#eef2f8;color:#1a3a5c;border:1px solid #8aaacf}
+    .b-history{background:#faf3e0;color:#7a5010;border:1px solid #d8b060}
+    .b-homeland{background:#fff0f0;color:#8b2020;border:1px solid #f0b0b0}
+    .b-nature{background:#eef6ea;color:#2a5a1a;border:1px solid #90c880}
+
+    /* FULL WIDTH IMAGE */
+    .fw-img{height:380px;position:relative;overflow:hidden}
+    .fw-img img{width:100%;height:100%;object-fit:cover;object-position:center 40%;transition:transform .8s ease;display:block}
+    .fw-img:hover img{transform:scale(1.04)}
+    .fw-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,20,5,.7) 0%,rgba(10,20,5,.3) 50%,rgba(10,20,5,.7) 100%)}
+    .fw-caption{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;text-align:center;width:90%}
+    .fw-caption h3{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:white;text-shadow:0 3px 30px rgba(0,0,0,.8);margin-bottom:.5rem}
+    .fw-caption p{color:var(--gold-light);font-style:italic;font-size:1rem}
+
+    /* NAADAM */
+    .naadam{position:relative;overflow:hidden;height:340px;display:flex;align-items:center;justify-content:center}
+    .naadam img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%}
+    .naadam::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(100,10,10,.88) 0%,rgba(80,10,10,.65) 50%,rgba(100,10,10,.88) 100%)}
+    .naadam-inner{position:relative;z-index:2;text-align:center;padding:2rem}
+    .naadam-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.5rem);color:var(--gold-light);font-weight:700;margin-bottom:.8rem}
+    .naadam-text{color:rgba(255,255,255,.88);font-size:.95rem;line-height:1.82;max-width:620px;margin:0 auto}
+
+    /* PANO ROW */
+    .pano-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3px;height:320px}
+    .pano-cell{position:relative;overflow:hidden}
+    .pano-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+    .pano-cell:hover img{transform:scale(1.08)}
+    .pano-cell::after{content:attr(data-label);position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1rem .7rem;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,transparent 100%);color:rgba(255,255,255,.85);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:0;transition:opacity .3s}
+    .pano-cell:hover::after{opacity:1}
+
+    /* TIPS */
+    .tips-bg{background:var(--sky);padding:5rem 2rem}
+    .tips-inner{max-width:1200px;margin:0 auto}
+    .tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem;margin-top:3rem}
+    .tip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1.6rem;transition:background .3s}
+    .tip:hover{background:rgba(255,255,255,.12)}
+    .tip-icon{font-size:2rem;margin-bottom:.7rem;display:block}
+    .tip-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--gold-light);margin-bottom:.55rem}
+    .tip-text{font-size:.83rem;color:rgba(255,255,255,.68);line-height:1.72}
+
+    .ornament{text-align:center;color:var(--gold);letter-spacing:.8rem;padding:2rem 0;font-size:.9rem;opacity:.4;background:var(--cream)}
+    footer{background:#060e04;color:rgba(255,255,255,.42);text-align:center;padding:2.8rem 2rem;font-size:.8rem;letter-spacing:.1em;line-height:2.1}
+    footer em{color:var(--gold-light);font-style:italic}
+
+    @media(max-width:700px){
+      .photo-strip{grid-template-columns:repeat(3,1fr)}
+      .ps-cell:nth-child(n+4){display:none}
+      .pano-row{grid-template-columns:1fr;height:auto}
+      .pano-cell{height:200px}
+      .hero-stats{gap:1.5rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="stripe stripe-top"></div>
+  <div class="hero-slides">
+    <div class="slide" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg')"></div>
+    <div class="slide" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg')"></div>
+    <div class="slide" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">2030 оны зун &nbsp;·&nbsp; Монгол орон</p>
+    <h1 class="hero-title">Монголын<br/><em>Нутаг Дэвсгэр</em></h1>
+    <p class="hero-subtitle">Гэр бүлийн өв уламжлалын аялал</p>
+    <div class="hero-rule"></div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">27</span><div class="stat-lbl">Өдөр</div></div>
+      <div class="stat"><span class="stat-num">~4500</span><div class="stat-lbl">Километр</div></div>
+      <div class="stat"><span class="stat-num">7</span><div class="stat-lbl">Зогсоол</div></div>
+      <div class="stat"><span class="stat-num">15</span><div class="stat-lbl">Хүн</div></div>
+    </div>
+    <p class="hero-desc">Улаанбаатараас эхлэн баруун Монголоор тойрч — ээжийн нутаг Говь-Алтай, аавын нутаг Увс нуур, Хөвсгөл нуур, Алтайн Таван Богдоор дайран буцах 15 хүний гэр бүлийн аялал.</p>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>доош</div>
+  <div class="stripe stripe-bottom"></div>
+</section>
+
+<!-- ROUTE BAR -->
+<div class="route-bar">
+  <span class="rs">Улаанбаатар</span><span class="ra">→</span>
+  <span class="rs">Хархорум</span><span class="ra">→</span>
+  <span class="rs">Орхоны хөндий</span><span class="ra">→</span>
+  <span class="rs">Говь-Алтай</span><span class="ra">→</span>
+  <span class="rs">Таван Богд</span><span class="ra">→</span>
+  <span class="rs">Увс нуур</span><span class="ra">→</span>
+  <span class="rs">Хөвсгөл нуур</span><span class="ra">→</span>
+  <span class="rs">Улаанбаатар</span>
+</div>
+
+<!-- PHOTO STRIP — 5 confirmed Mongolian photos -->
+<div class="photo-strip">
+  <div class="ps-cell" data-label="Монголын тал нутаг">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="Монголын тал нутаг" loading="lazy"/>
+  </div>
+  <div class="ps-cell" data-label="Нүүдэлчдийн гэр">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="Гэрийн буудал" loading="lazy"/>
+  </div>
+  <div class="ps-cell" data-label="Хөвсгөл нуур">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="Хөвсгөл нуур" loading="lazy"/>
+  </div>
+  <div class="ps-cell" data-label="Монголын ой уул">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="Монголын уул ой" loading="lazy"/>
+  </div>
+  <div class="ps-cell" data-label="Өргөн тал хээр">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="Монголын хээр тал" loading="lazy"/>
+  </div>
+</div>
+
+<!-- STOPS -->
+<section class="section-wrap">
+  <p class="eyebrow">Аяллын маршрут</p>
+  <h2 class="heading">Аяллын зогсоолууд</h2>
+  <p class="lead">Зусландаар баруун тийш тойрч явах 27 хоногийн маршрут. 15 хүн гурван машинаар өөрсдөө жолоодно. Аялал нь ахмад хүмүүс болон хүүхдэд тохирсон хэмжээгээр төлөвлөгдсөн.</p>
+
+  <div class="cards-grid">
+
+    <!-- 1. UB -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">1–2 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="Улаанбаатар" loading="lazy"/>
+        <h3 class="photo-ttl">Улаанбаатар<span class="photo-sub">Нийслэл хот · Гарах цэг</span></h3>
+      </div>
+      <div class="accent a-blue"></div>
+      <div class="card-body">
+        <p class="card-desc">2 өдөр нийслэлд зогсож аяллын бэлтгэлийг хийнэ. 15 хүний гурван машин, хоол хүнс, анхны тусламжийн хэрэгслийг бүрэн бэлтгэнэ.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Монголын Үндэсний музей</li>
+          <li>Гандантэгчинлэн хийд</li>
+          <li>Сүхбаатарын талбай</li>
+          <li>Нарантуул зах — замын хангамж</li>
+          <li>Гурван машин, нөөц хангамж бэлтгэх</li>
+        </ul>
+        <span class="badge b-city">Нийслэл</span>
+      </div>
+    </article>
+
+    <!-- 2. KARAKORUM -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">3–6 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="Орхоны хөндий" loading="lazy"/>
+        <h3 class="photo-ttl">Хархорум &amp; Орхоны хөндий<span class="photo-sub">ЮНЕСКО-н өв · ⭐ 4.6</span></h3>
+      </div>
+      <div class="accent a-gold"></div>
+      <div class="card-body">
+        <p class="card-desc">Монголын эзэнт гүрний нийслэл байсан Хархорумаас эхлэн, Орхоны гайхамшигт хөндийгөөр 4 өдөр аялна.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Эрдэнэ зуу хийд — 1586 онд баригдсан</li>
+          <li>Хархорум музей</li>
+          <li>Орхоны хүрхрээ</li>
+          <li>Нүүдэлчин малчны гэрт зочлох</li>
+          <li>Морин унаа — хүн бүрт</li>
+        </ul>
+        <span class="badge b-history">Түүхийн газар</span>
+      </div>
+    </article>
+
+    <!-- 3. GOVI-ALTAI -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">7–10 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="Говь-Алтай" loading="lazy"/>
+        <h3 class="photo-ttl">Говь-Алтай<span class="photo-sub">🏔️ Ээжийн нутаг</span></h3>
+      </div>
+      <div class="accent a-red"></div>
+      <div class="card-body">
+        <p class="card-desc">Ээжийн төрсөн нутаг Говь-Алтайд 3 хонох. Аяллын хамгийн зүрхэнд хүрэх, утга учир бүхий зогсоол.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Ээж Хайрхан уул</li>
+          <li>Цэнхэр агуй — эртний хадны зураг</li>
+          <li>Говь-Алтайн өргөн тал</li>
+          <li>Ээжийн нутгийн хүмүүстэй уулзах</li>
+          <li>Уулын ландшафт, цагаан цас оргилууд</li>
+        </ul>
+        <span class="badge b-homeland">Ээжийн нутаг</span>
+      </div>
+    </article>
+
+    <!-- 4. TAVAN BOGD -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">11–13 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="Таван Богд" loading="lazy"/>
+        <h3 class="photo-ttl">Алтайн Таван Богд<span class="photo-sub">Баян-Өлгий · ⭐ 4.8</span></h3>
+      </div>
+      <div class="accent a-green"></div>
+      <div class="card-body">
+        <p class="card-desc">Монголын баруун хойд булангийн сүр жавхлант таван оргил — Оросын болон Хятадын хил дагуух. Азийн хамгийн гайхалтай байгалийн газруудын нэг.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Потанины мөсөн голоор алхах</li>
+          <li>Казах бүргэд барьгчидтай уулзах</li>
+          <li>Шивээт Хайрхан — эртний хадны зураг</li>
+          <li>Таван оргилыг ажиглах</li>
+          <li>Монгол, Орос, Хятадын хил огтлолцдог цэг</li>
+        </ul>
+        <span class="badge b-nature">Байгалийн гайхамшиг</span>
+      </div>
+    </article>
+
+    <!-- 5. UVS -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">14–16 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="Увс нуур" loading="lazy"/>
+        <h3 class="photo-ttl">Увс нуур<span class="photo-sub">💙 Аавын нутаг · ЮНЕСКО</span></h3>
+      </div>
+      <div class="accent a-indigo"></div>
+      <div class="card-body">
+        <p class="card-desc">Монголын хамгийн том давстай нуур — ЮНЕСКО-н дэлхийн өвд бүртгэлтэй. Аавын залуу насны нутаг, гэр бүлийн хувьд онцгой утга агуулсан зогсоол.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Монголын хамгийн том нуур</li>
+          <li>Зуны шувуу ажиглалт — фламинго, пеликан</li>
+          <li>Өмнөд эрэгт усанд орох</li>
+          <li>Улаангом хотоор зочлох</li>
+          <li>Аавын ой дурдлагатай газрууд</li>
+        </ul>
+        <span class="badge b-homeland">Аавын нутаг</span>
+      </div>
+    </article>
+
+    <!-- 6. KHUVSGUL -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">17–22 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="Хөвсгөл нуур" loading="lazy"/>
+        <h3 class="photo-ttl">Хөвсгөл нуур<span class="photo-sub">Монголын хөх сувд · ⭐ 4.8</span></h3>
+      </div>
+      <div class="accent a-teal"></div>
+      <div class="card-body">
+        <p class="card-desc">Монголын хамгийн гүн нуур. Аяллын хамгийн урт буудал — 5 шөнө. Хүүхэд болон ахмадуудад тайван, тохилог байгалийн орчин.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Баруун эргийн замаар алхах</li>
+          <li>Каяк, завиар усан аялал</li>
+          <li>Цаатан буган малчидтай уулзах</li>
+          <li>Тунгалаг нуурт усанд орох</li>
+          <li>Мөрөн хотоор өнгөрч явах</li>
+        </ul>
+        <span class="badge b-nature">Байгалийн гайхамшиг</span>
+      </div>
+    </article>
+
+    <!-- 7. RETURN -->
+    <article class="card">
+      <div class="card-img">
+        <span class="day-badge">23–27 дугаар өдөр</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="Буцах зам" loading="lazy"/>
+        <h3 class="photo-ttl">Улаанбаатар буцах<span class="photo-sub">Аяллын төгсгөл</span></h3>
+      </div>
+      <div class="accent a-blue"></div>
+      <div class="card-body">
+        <p class="card-desc">Мөрөнд нэг шөнө зогсоод нийслэл рүү замаа үргэлжлүүлнэ. Улаанбаатарт 2 өдөр амарч, гэр бүлийн нэгдсэн дайллага хийнэ.</p>
+        <div class="thumbs">
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="" loading="lazy"/></div>
+          <div class="thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="" loading="lazy"/></div>
+        </div>
+        <ul class="card-ul">
+          <li>Мөрөнд түлш, хоол, амралт</li>
+          <li>ТДС дэлгүүрт худалдаа хийх</li>
+          <li>Гэр бүлийн нэгдсэн дайллага</li>
+          <li>Нийслэлийн сайн ресторанд хоол идэх</li>
+        </ul>
+        <span class="badge b-city">Нийслэл</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- FULL WIDTH — Mongolian steppe panorama -->
+<div class="fw-img">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Clouds_in_mongolian_steppe_-_panoramio.jpg" alt="Монголын тал нутаг" loading="lazy"/>
+  <div class="fw-caption">
+    <h3>Монголын өргөн уудам тал нутаг</h3>
+    <p>Нүүдэлчдийн эх нутаг — дэлхийн хамгийн том тал хэдийн</p>
+  </div>
+</div>
+
+<!-- NAADAM -->
+<div class="naadam">
+  <img class="bg" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="Наадам" loading="lazy"/>
+  <div class="naadam-inner">
+    <h3 class="naadam-title">🏹 Наадамтай давхцуулах боломж</h3>
+    <p class="naadam-text">Хэрэв аяллаа <strong>7 дугаар сарын 11–13</strong>-нд Улаанбаатарт эхлүүлбэл <strong>Нийслэлийн Наадам</strong>-д оролцох боломжтой. Увс аймагт байх үед аймгийн Наадамтай тохирч болно — морин уралдаан, бөх, сурын харваа гурвыг нутгийн хэмжээнд үзнэ.</p>
+  </div>
+</div>
+
+<!-- PANO ROW — 3 Mongolian scenes side by side -->
+<div class="pano-row">
+  <div class="pano-cell" data-label="Хөвсгөл нуурын эрэг">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Gorchi-Tereldsch22.JPG" alt="Хөвсгөл нуур" loading="lazy"/>
+  </div>
+  <div class="pano-cell" data-label="Монголын ой уул">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Mongol_ger.JPG" alt="Ой уул" loading="lazy"/>
+  </div>
+  <div class="pano-cell" data-label="Өглөөний гэрийн буудал">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="Гэрийн буудал" loading="lazy"/>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="tips-bg">
+  <div class="tips-inner">
+    <p class="eyebrow" style="color:var(--gold-light)">Зөвлөгөө</p>
+    <h2 class="heading" style="color:white">Аяллын чухал зөвлөмжүүд</h2>
+    <p class="lead" style="color:rgba(255,255,255,.6);margin-bottom:0">15 хүний гурван машинтай аялалд хэрэгтэй практик мэдээлэл.</p>
+    <div class="tips-grid">
+      <div class="tip"><span class="tip-icon">🚙</span><h4 class="tip-title">Машин · 3 хөлөг</h4><p class="tip-text">15 хүнд Toyota Land Cruiser 200 гурав хамгийн тохиромжтой. Офлайн газрын зураг заавал татах — Maps.me болон Gaia GPS ашиглаарай.</p></div>
+      <div class="tip"><span class="tip-icon">🏕️</span><h4 class="tip-title">Байрлал</h4><p class="tip-text">Хөвсгөл болон Орхонд урьдчилан гэрийн буудал захиалаарай. 15 хүнд гэрийн буудлыг бүхэлд нь захиалах боломжтой.</p></div>
+      <div class="tip"><span class="tip-icon">⛽</span><h4 class="tip-title">Түлш</h4><p class="tip-text">Баруун аймгуудад шатахуун цэг хоорондын зай урт. Нэмэлт шатахуун сав тус бүр машинд заавал авч явах хэрэгтэй.</p></div>
+      <div class="tip"><span class="tip-icon">📡</span><h4 class="tip-title">Холбоо</h4><p class="tip-text">Говь-Алтайгаас баруун тийш гар утасны сигнал байхгүй. Garmin InReach дагуул харилцааны төхөөрөмж авч явахыг зөвлөж байна.</p></div>
+      <div class="tip"><span class="tip-icon">👴👵</span><h4 class="tip-title">Ахмад &amp; хүүхэд</h4><p class="tip-text">Өдрийн жолоодлого 5–6 цагаас хэтрэхгүй байхаар төлөвлөгдсөн. Хөвсгөлд 5 шөнийн амралт нь ахмад болон хүүхдэд хамгийн тохиромжтой.</p></div>
+      <div class="tip"><span class="tip-icon">🌡️</span><h4 class="tip-title">Цаг агаар</h4><p class="tip-text">Зун дулаан боловч баруун уулархаг нутагт орой нь хүйтэрнэ. Хөнгөн дулаан хувцас нэмж авч яваарай.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING IMAGE -->
+<div class="fw-img" style="height:300px">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Horse_in_Terelj-Gorkhi_National_park.jpg" alt="Монгол орон" loading="lazy"/>
+  <div class="fw-caption">
+    <h3 style="font-size:clamp(1.4rem,3vw,2.2rem)">2030 он · 15 хүн · Гэр бүлийн аялал</h3>
+    <p>Уулзая, аялья, санаж явья</p>
+  </div>
+</div>
+
+<div class="ornament">⬥ &nbsp; ⬥ &nbsp; ⬥ &nbsp; ⬥ &nbsp; ⬥</div>
+
+<footer>
+  <p>Монголын нутаг дэвсгэрийн гэр бүлийн аялал &nbsp;·&nbsp; <em>2030 он · Зун</em></p>
+  <p>Улаанбаатар → Хархорум → Говь-Алтай → Таван Богд → Увс → Хөвсгөл → Улаанбаатар</p>
+  <p style="margin-top:.8rem;font-size:.7rem;opacity:.35">15 хүн · 3 машин · 27 өдөр · ~4500 км</p>
+</footer>
+
+<script>
+  const cards = document.querySelectorAll('.card');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e,i) => {
+      if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('vis'), i*90); obs.unobserve(e.target); }
+    });
+  },{threshold:.08});
+  cards.forEach(c=>obs.observe(c));
+</script>
+</body>
+</html>
